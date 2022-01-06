@@ -2,10 +2,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidGJyYWRlIiwiYSI6ImNreTEwZHA4YjA2ZmkydXNjcmVyM
 const map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/satellite-v9',
-center: [-103.2502, 29.2498],
-zoom: 9, // starting zoom
-pitch: 85,
-//bearing: 80,
+center: [-103.2923, 29.2450],
+zoom: 9.25, // starting zoom
+pitch: 60,
+bearing: 0,
 });
 
 map.on('load', () => {
@@ -48,32 +48,31 @@ map.on('load', () => {
     map.getCanvas().style.cursor = '';
   });
 
+  map.addSource('bounds', {
+    type: 'geojson',
+    data: 'data/bibe_boundary_WGS_1984.geojson'
+  });
+
+  map.addLayer({
+    'id': 'boundary-layer',
+    'type': 'line',
+    'source': 'bounds',
+    'paint': {
+      'line-width': 4,
+      'line-color': 'black',
+      'line-opacity': .6
+    }
+  });
 
 
-map.addSource('bounds', {
-  type: 'geojson',
-  data: 'data/bibe_boundary_WGS_1984.geojson'
-});
-
-map.addLayer({
-  'id': 'boundary-layer',
-  'type': 'line',
-  'source': 'bounds',
-  'paint': {
-    'line-width': 4,
-    'line-color': 'black',
-    'line-opacity': .6
-  }
-});
-
-map.on('load', function () {
   map.addSource('mapbox-dem', {
       "type": "raster-dem",
       "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
       'tileSize': 512,
       'maxzoom': 14
   });
-  map.setTerrain({"source": "mapbox-dem", "exaggeration": 1.0});
+
+  map.setTerrain({'source': 'mapbox-dem', 'exaggeration': 1.25});
 
   map.addLayer({
           'id': 'sky',
@@ -81,10 +80,22 @@ map.on('load', function () {
           'paint': {
               'sky-type': 'atmosphere',
               'sky-atmosphere-sun': [0.0, 0.0],
-              'sky-atmosphere-sun-intensity': 15
+              'sky-atmosphere-sun-intensity': 5
           }
   });
 
 });
 
+const navControl = new mapboxgl.NavigationControl({
+  visualizePitch: true
 });
+map.addControl(navControl, 'top-right');
+
+const scale = new mapboxgl.ScaleControl({
+  maxWidth: 80,
+  unit: 'imperial',
+});
+
+map.addControl(scale, 'bottom-left');
+
+scale.setUnit('imperial');

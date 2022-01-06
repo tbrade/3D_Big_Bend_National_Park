@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Big Bend National Park Trails</title>
   <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
   <link rel='stylesheet' href='styles.css' />
 </head>
 <body>
+  <center><h1 class="description">Big Bend National Park Trails</h1>
+  <div id ="p">
+  <center><p>Located in Texas, Big Bend National Park is farther south than most of the national parks in the United States.  The map below depicts minimally developed, moderately developed, and developed trails within Big Bend National Park.  When clicked, each trail provides its trail name, its trail class (level of development), and the length of the trail.  Users can use the "+" and "-" buttons to zoom in or zoom out on the map. Use the navigation control below the zoom controls to change the orientation of the map. Click and hold down the navigation control to change the orientation of the 3D map and click the control once to align the map with true north.</p></center>
+  <center><p>More information on the trails in Big Bend National Park can be found on the <a target="_blank" href="https://www.nps.gov/bibe/planyourvisit/day_hikes.htm">Day Hikes</a> and <a target="_blank" href="https://www.nps.gov/bibe/planyourvisit/backpacking_chisos.htm">Backpacking in Big Bend</a> webpages on the Big Bend - National Park Service website.
+  <center><p>Data for the trails and boundary of Big Bend National Park were gathered from the <a target="_blank" href="https://hub.arcgis.com/datasets/nps::big-bend-national-park-trails/about">National Park Service on ArcGIS Hub</a> and the <a target="_blank" href="https://data.doi.gov/dataset/big-bend-national-park-tract-and-boundary-data"> National Park Service on the Department of the Interior website</a> respectively. The boundary data for Big Bend National Park was given a new geographic coordinate system (WGS 1984) in ESRI's ArcGIS Pro and was then turned into a GeoJSON file using the Features to JSON tool also using ArcGIS Pro.  When using the Features to JSON tool in ArcGIS Pro the "Output to GeoJSON" and "Project to WGS_1984" boxes were checked.</p></center>
+  </div>
   <div id='map'></div>
   <div id='legend'>
     <h4>Big Bend NP Trails</h4>
@@ -16,7 +23,6 @@
         <li><hr class="boundary"> Park boundary</li>
     </ul>
 </div>
-  <script src="scripts.js"></script>
-
+<script type ="text/javascript" src="scripts.js"></script>
 </body>
 </html>
